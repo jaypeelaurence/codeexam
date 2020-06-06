@@ -4,9 +4,10 @@ const formatDate = require('./formatDate');
 const userDic = [];
 
 const cash_in = (data, commis) => {
-	let value;
 	const commission = JSON.parse(commis);
 	const percent = parseFloat(commission.percents) / 100;
+
+	let value;
 
 	value = data.operation.amount * percent;
 
@@ -18,9 +19,10 @@ const cash_in = (data, commis) => {
 }
 
 const cash_out_natural = (inputData, data, commis) => {
-	let value;
 	const commission = JSON.parse(commis);
 	const percent = parseFloat(commission.percents) / 100;
+
+	let value;
 
 	const range = dateRange(data.date);
 		
@@ -62,9 +64,10 @@ const cash_out_natural = (inputData, data, commis) => {
 }
 
 const cash_out_juridical = (data, commis) => {
-	let value;
 	const commission = JSON.parse(commis);
 	const percent = parseFloat(commission.percents) / 100;
+
+	let value;
 
 	value = data.operation.amount * percent;
 
@@ -75,10 +78,10 @@ const cash_out_juridical = (data, commis) => {
 	return value;
 }
 
-const getCommision = (dataInput, commis) => {
-	const values = [];
+const getCommision = (dataInput, commis) => (
+	dataInput.map((data, key) => {
+		let value;
 
-	dataInput.forEach((data, key) => {
 		switch(data.type){
 			case "cash_in":
 				value = cash_in(data, commis[0]);
@@ -95,10 +98,8 @@ const getCommision = (dataInput, commis) => {
 			break;
 		}
 
-		values.push(value.toFixed(2))
+		return value.toFixed(2);
 	})
-
-	return values;
-}
+)
 
 module.exports = getCommision;
