@@ -3,9 +3,9 @@ const path = require('path');
 
 const app = require('./app');
 
-const dataInput = require('./data/input');
+const dataInput = require('./data/input'); // change the data input for testable files.
 
-const testArray = [
+const testArray = [ // testing values
 	0.06,
 	0.90,
 	87.00,
