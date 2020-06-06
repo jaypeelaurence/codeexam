@@ -31,8 +31,8 @@ const cash_out_natural = (inputData, data, commis) => {
 		dat.user_id === data.user_id &&
 		dat.user_type === "natural" &&
 		dat.type === "cash_out" &&
-		range[0] < formatDate(dat.date) &&
-		formatDate(dat.date) < range[1]
+		range[0] <= formatDate(dat.date) &&
+		formatDate(dat.date) <= range[1]
 	));
 
 	const getUser = userDic.find(user => user === data.user_id);
