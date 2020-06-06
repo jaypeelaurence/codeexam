@@ -1,0 +1,20 @@
+{
+  "name": "commissionapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^26.0.1",
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5"
+  }
+}
