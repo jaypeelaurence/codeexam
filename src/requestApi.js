@@ -1,24 +1,40 @@
 const request = require('request-promise');
 
-const requestApi = async _ => {
-	let getCashIn;
-	let getCashOutNatural;
-	let getCashOutLegal;
-	let result;
+const requestApi = async () => {
+  let result;
+  let getCashIn;
+  let getCashOutNatural;
+  let getCashOutLegal;
 
-	getCashIn = request('http://private-38e18c-uzduotis.apiary-mock.com/config/cash-in');
+  try {
+    getCashIn = await request({
+      method: 'GET',
+      url: 'http://private-38e18c-uzduotis.apiary-mock.com/config/cash-in',
+      json: true,
+    });
 
-	getCashOutNatural = request('http://private-38e18c-uzduotis.apiary-mock.com/config/cash-out/natural');
+    getCashOutNatural = await request({
+      method: 'GET',
+      url: 'http://private-38e18c-uzduotis.apiary-mock.com/config/cash-out/natural',
+      json: true,
+    });
 
-	getCashOutLegal = request('http://private-38e18c-uzduotis.apiary-mock.com/config/cash-out/juridical');
+    getCashOutLegal = await request({
+      method: 'GET',
+      url: 'http://private-38e18c-uzduotis.apiary-mock.com/config/cash-out/juridical',
+      json: true,
+    });
 
-	result = Promise.all([
-		getCashIn,
-		getCashOutNatural,
-		getCashOutLegal
-	])
+    result = {
+      cashIn: getCashIn,
+      cashOutNatural: getCashOutNatural,
+      cashOutJuridical: getCashOutLegal,
+    };
+  } catch (err) {
+    result = err;
+  }
 
-	return result;
-}
+  return result;
+};
 
 module.exports = requestApi;
