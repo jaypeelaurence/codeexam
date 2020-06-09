@@ -1,19 +1,21 @@
-let requestApi = require('./src/requestApi');
-let getCommision = require('./src/getCommision');
+const requestApi = require('./src/requestApi');
+const getCommission = require('./src/getCommission');
 
-const App = async dataInput => {
-	let commision;
-	let result;
+const App = async (dataInput) => {
+  let result;
+  let commissions;
 
-	commision = await requestApi(); // request Commission API
+  try {
+    commissions = await requestApi(); // request Commission API
 
-	if(commision){
-		result = await getCommision(dataInput, commision); // loads and computes the input data commission
-	}else{
-		result = commision;
-	}
+    if (commissions) {
+      result = await getCommission(dataInput, commissions); // loads and computes
+    }
+  } catch (err) {
+    result = err.message;
+  }
 
-	return result;
-}
+  return result;
+};
 
 module.exports = App;
