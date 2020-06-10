@@ -6,10 +6,14 @@
   "scripts": {
     "start": "nodemon index",
     "start-dev": "lint-fix-nodemon index",
-    "test": "jest"
+    "test": "jest --verbose ./test"
   },
   "nodemonConfig": {
-    "watch": ["./"]
+    "watch": [
+      "./src",
+      "./app.js",
+      "./index.js"
+    ]
   },
   "author": "",
   "license": "ISC",
