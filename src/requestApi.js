@@ -2,33 +2,33 @@ const request = require('request-promise');
 
 const requestApi = async () => {
   let result;
-  let getCashIn;
-  let getCashOutNatural;
-  let getCashOutLegal;
+  let cashIn;
+  let cashOutNatural;
+  let cashOutJuridical;
 
   try {
-    getCashIn = await request({
+    cashIn = await request({
       method: 'GET',
       url: 'http://private-38e18c-uzduotis.apiary-mock.com/config/cash-in',
       json: true,
     });
 
-    getCashOutNatural = await request({
+    cashOutNatural = await request({
       method: 'GET',
       url: 'http://private-38e18c-uzduotis.apiary-mock.com/config/cash-out/natural',
       json: true,
     });
 
-    getCashOutLegal = await request({
+    cashOutJuridical = await request({
       method: 'GET',
       url: 'http://private-38e18c-uzduotis.apiary-mock.com/config/cash-out/juridical',
       json: true,
     });
 
     result = {
-      cashIn: getCashIn,
-      cashOutNatural: getCashOutNatural,
-      cashOutJuridical: getCashOutLegal,
+      cashIn,
+      cashOutNatural,
+      cashOutJuridical,
     };
   } catch (err) {
     result = err;

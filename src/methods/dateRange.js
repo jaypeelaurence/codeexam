@@ -1,11 +1,15 @@
 const dateRange = (date) => {
   const current = new Date(date);
-  const weekstart = current.getDate() - current.getDay() + 1;
-  const weekend = weekstart + 6;
-  const monday = new Date(current.setDate(weekstart)).getTime();
-  const sunday = new Date(current.setDate(weekend)).getTime();
+  const startWeek = new Date(
+    current.setDate(current.getDate() - (((current.getDay() + 7) - 1) % 7)),
+  );
+  startWeek.setHours(0, 0, 0);
+  const endWeek = new Date(
+    current.setDate((current.getDate() - current.getDay() + 1) + 6),
+  );
+  endWeek.setHours(23, 59, 59);
 
-  return [monday, sunday];
+  return [startWeek.getTime(), endWeek.getTime()];
 };
 
 module.exports = dateRange;
